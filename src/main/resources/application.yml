@@ -1,0 +1,17 @@
+server:
+  port: 8848
+spring:
+  application:
+    name: yhx
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm:ss
+  jackson:
+    time-zone: GMT+8
+  profiles:
+    active: local
+mybatis.mapper-locations: classpath:mybatis/mapper/*.xml
