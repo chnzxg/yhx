@@ -16,12 +16,12 @@ import java.util.List;
  * @description
  */
 @Data
-@Table(name = "order")
+@Table(name = "public.order")
 public class OrderDO implements Serializable {
 
     public enum ORDER_TYPE {
         HALL(0, "hall"),
-        TAKEOUT(0, "takeout");
+        TAKEOUT(1, "takeout");
 
         private int code;
         private String desc;

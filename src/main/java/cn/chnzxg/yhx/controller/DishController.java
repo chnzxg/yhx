@@ -37,7 +37,7 @@ public class DishController {
             @RequestParam(required = false) Integer priceEnd,
             @RequestParam(required = false) Integer classId,
             @RequestParam(required = false, defaultValue = "1") Integer page,
-            @RequestParam(required = false, defaultValue = "10") Integer limit
+            @RequestParam(required = false, defaultValue = "20") Integer limit
     ) {
         Condition condition = new Condition(DishDO.class);
         Example.Criteria criteria = condition.createCriteria();
@@ -53,7 +53,7 @@ public class DishController {
         if (classId != null) {
             criteria.andEqualTo("classId", classId);
         }
-        condition.setOrderByClause("id desc");
+        condition.setOrderByClause("price desc");
 
         PageHelper.startPage(page, limit);
         List<DishDO> result = dishMapper.selectByCondition(condition);

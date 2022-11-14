@@ -147,6 +147,12 @@ export const asyncRoutes = [
         component: () => import('@/views/yhx/dish-list'),
         name: 'dish-list',
         meta: { title: '菜品列表' }
+      },
+      {
+        path: 'order-list',
+        component: () => import('@/views/yhx/order-list'),
+        name: 'order-list',
+        meta: { title: '订单列表' }
       }
     ]
   },

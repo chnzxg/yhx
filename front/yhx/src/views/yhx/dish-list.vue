@@ -30,7 +30,7 @@
     <el-table
       :key="tableKey"
       :data="list"
-      height="545"
+      height="677"
       border
       fit
       highlight-current-row
@@ -75,7 +75,13 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" page-sizes="[10,20,50,100,200,500]" @pagination="getList" />
+    <pagination v-show="total>0"
+                :total="total"
+                :page.sync="listQuery.page"
+                :limit.sync="listQuery.limit"
+                :current-page="listQuery.page"
+                :page-sizes="[10, 20, 50, 100, 200]"
+                @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -112,23 +118,10 @@
 </template>
 
 <script>
-import { dishList, dishDelete, dishUpdate, dishCreate } from '@/api/dish/dish.js'
+import { dishList, dishDelete, dishUpdate, dishCreate } from '@/api/yhx/dish.js'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
-
-const calendarTypeOptions = [
-  { key: 'CN', display_name: 'China' },
-  { key: 'US', display_name: 'USA' },
-  { key: 'JP', display_name: 'Japan' },
-  { key: 'EU', display_name: 'Eurozone' }
-]
-
-// arr to obj, such as { CN : "China", US : "USA" }
-const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name
-  return acc
-}, {})
 
 export default {
   name: 'ComplexTable',
@@ -144,7 +137,6 @@ export default {
       return statusMap[status]
     },
     typeFilter(type) {
-      return calendarTypeKeyValue[type]
     }
   },
   data() {
@@ -155,7 +147,7 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 10,
+        limit: 20,
         name: undefined,
         priceStart: undefined,
         priceEnd: undefined,
@@ -163,7 +155,6 @@ export default {
         // sort: '+id'
       },
       importanceOptions: [1, 2, 3],
-      calendarTypeOptions,
       // sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
       statusOptions: ['published', 'draft', 'deleted'],
       showReviewer: false,
@@ -354,3 +345,9 @@ export default {
   }
 }
 </script>
+<style>
+.el-table__body td,.el-table__body th{
+  padding:1px;
+  height: 10px;
+}
+</style>
